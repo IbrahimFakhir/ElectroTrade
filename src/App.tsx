@@ -5,7 +5,7 @@ import Login from "./pages/Login";
 import Portfolio from "./pages/Portfolio";
 import Market from "./pages/Market";
 import Account from "./pages/Account";
-import pages from "./utils/pages";
+import { pages } from "./utils/pages";
 
 function App() {
 	return (

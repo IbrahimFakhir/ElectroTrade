@@ -1,17 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
 import { IconButton } from '@mui/material';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import LocalGroceryStoreOutlinedIcon from '@mui/icons-material/LocalGroceryStoreOutlined';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import pages from "../../utils/pages";
+import { pages, pageIcons } from '../../utils/pages';
 
 const navLinks = Array.from(pages.values()).filter(page => page.anchorable);
-
-const icons = {
-    Portfolio: <AttachMoneyIcon />,
-    Market: <LocalGroceryStoreOutlinedIcon />,
-	Account: <AccountCircleOutlinedIcon />
-}
 
 const NavList = () => {
     const { pathname } = useLocation();
@@ -36,7 +27,7 @@ const NavList = () => {
                                 },
                             }}
                         >
-                            <AttachMoneyIcon />
+                            {pageIcons.get(navLink.name)}
                             <span className='hidden md:inline md:ml-3'>{navLink.name}</span>
                         </IconButton>
                     </Link>
