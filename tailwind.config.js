@@ -17,6 +17,12 @@ export default {
 			},
 			height: {
 				"mainMobile": "calc(100% - 4rem)"
+			},
+			width: {
+				"mainMobile": "calc(100% - 14rem)"
+			},
+			maxWidth: {
+				"navItemMobile": "4rem"
 			}
 		},
 	},

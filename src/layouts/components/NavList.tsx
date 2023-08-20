@@ -1,0 +1,49 @@
+import { Link, useLocation } from 'react-router-dom';
+import { IconButton } from '@mui/material';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import LocalGroceryStoreOutlinedIcon from '@mui/icons-material/LocalGroceryStoreOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import pages from "../../utils/pages";
+
+const navLinks = Array.from(pages.values()).filter(page => page.anchorable);
+
+const icons = {
+    Portfolio: <AttachMoneyIcon />,
+    Market: <LocalGroceryStoreOutlinedIcon />,
+	Account: <AccountCircleOutlinedIcon />
+}
+
+const NavList = () => {
+    const { pathname } = useLocation();
+
+    return (
+        /* md:justify-between needed? */
+        <ul className="list-none flex items-center md:flex-col justify-evenly md:h-60">
+            {navLinks.map((navLink, index) => 
+                /* justify-start? */
+                <li className='h-16 md:h-full max-w-navItemMobile md:max-w-full md:w-full grow flex justify-start items-center' key={index}>
+                    <Link className='no-underline h-full w-full' to={navLink.path}>
+                        <IconButton
+                            className='h-full w-full'
+                            color={pathname === navLink.path ? "primary": undefined}
+                            sx={{
+                                borderRadius: 0,
+                                margin: 0,
+                                padding: 0,
+                                opacity: 0.9,
+                                ":hover": {
+                                    opacity: 1
+                                },
+                            }}
+                        >
+                            <AttachMoneyIcon />
+                            <span className='hidden md:inline md:ml-3'>{navLink.name}</span>
+                        </IconButton>
+                    </Link>
+                </li>
+            )}
+        </ul>
+    )
+}
+
+export default NavList;
