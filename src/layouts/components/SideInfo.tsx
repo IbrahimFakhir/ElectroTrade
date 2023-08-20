@@ -1,4 +1,3 @@
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useContext } from "react";
 import { AuthContext } from '../../context/AuthContext';
 
@@ -7,8 +6,10 @@ const SideInfo = () => {
 
     return (
         <div className="h-full flex flex-col justify-start items-center">
-            <AccountCircleIcon sx={{ color:"#1976d2", height: "4rem", width: "4rem" }} />
-            <span className="font-roboto">{auth.firstName} {auth.lastName}</span>
+            <div className="text-xl font-semibold flex justify-center items-center bg-background w-20 h-20 rounded-full">
+                { auth.firstName.charAt(0) }{ auth.lastName.charAt(0) }
+            </div>
+            <span className="font-roboto mt-1">{auth.firstName} {auth.lastName}</span>
         </div>
     )
 }
