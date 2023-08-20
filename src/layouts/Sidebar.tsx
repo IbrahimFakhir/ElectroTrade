@@ -1,13 +1,13 @@
 const Sidebar = () => {
     return (
         <>
-            <div>
+            <div className="hidden md:block">
                 Info
             </div>
             <nav>
                 Nav
             </nav>
-            <div>
+            <div className="hidden md:block">
                 Logo
             </div>
         </>

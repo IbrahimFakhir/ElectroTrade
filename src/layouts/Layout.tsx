@@ -4,10 +4,10 @@ import { Outlet } from "react-router-dom";
 const Layout = () => {
     return (
         <>
-            <aside className="fixed flex flex-col justify-around w-56 h-screen shadow-xl">
+            <aside className="absolute md:fixed bottom-0 w-screen md:w-56 h-16 md:h-screen flex md:flex-col justify-around items-center md:shadow-xl">
                 <Sidebar />
             </aside>
-            <main className="font-roboto bg-background ml-56">
+            <main className="fixed font-roboto overflow-y-auto h-mainMobile md:h-full bg-background md:ml-56">
                 <Outlet />
             </main>
         </>

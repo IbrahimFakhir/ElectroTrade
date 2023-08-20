@@ -13,9 +13,11 @@ export default {
 			fontFamily: {
 				roboto: ["Roboto"],
 				poppins: ["Poppins"]
+			},
+			height: {
+				"mainMobile": "calc(100% - 4rem)"
 			}
 		},
 	},
 	plugins: [],
 }
-
