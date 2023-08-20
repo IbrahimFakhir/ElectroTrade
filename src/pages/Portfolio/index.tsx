@@ -1,7 +1,7 @@
-const Account = () => {
+const Portfolio = () => {
     return (
-        <div>Account</div>
+        <div>Portfolio</div>
     )
 }
 
-export default Account;
+export default Portfolio;
