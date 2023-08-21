@@ -1,0 +1,11 @@
+import { Register, Login } from "../features/authentication";
+
+const Authentication = () => {
+    return (
+        <div className="flex justify-center items-center h-full">
+            <Register />
+        </div>
+    )
+}
+
+export default Authentication;

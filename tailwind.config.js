@@ -6,7 +6,7 @@ export default {
 	],
 	theme: {
 		colors: {
-			background: "#DCDCDC",
+			customGray: "#DCDCDC",
 			muiBlueMain: "#1976d2"
 		}
 		,
@@ -19,7 +19,7 @@ export default {
 				"mainMobile": "calc(100% - 4rem)"
 			},
 			width: {
-				"mainMobile": "calc(100% - 14rem)"
+				"mainDesktop": "calc(100% - 14rem)"
 			},
 			maxWidth: {
 				"navItemMobile": "4rem"
