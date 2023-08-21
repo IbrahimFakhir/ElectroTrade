@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react";
 import { Paper, TextField, InputAdornment } from "@mui/material";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Button } from "@mui/material";
 
 const NAME_REGEX: RegExp = /^[\p{L}]+ [\p{L}]+$/u;
 const USERID_REGEX: RegExp = /^[A-Za-z][A-Za-z0-9]{2,}$/;
 const PASSWORD_REGEX: RegExp = /^[A-Za-z0-9]{3,}$/;
+
+const passwordIcons = {
+    true: <VisibilityIcon />,
+    false: <VisibilityOffIcon />
+}
 
 const Register = () => {
     const [name, setName] = useState<string>("");
@@ -19,6 +25,8 @@ const Register = () => {
     const [password, setPassword] = useState<string>("");
     const [validPassword, setValidPassword] = useState<boolean>(false);
     const [passwordFocus, setPasswordFocus] = useState<boolean>(false);
+
+    const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -120,7 +128,7 @@ const Register = () => {
                         <TextField
                             id="password"
                             label="Password"
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             required
                             value={password}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
@@ -130,7 +138,15 @@ const Register = () => {
                             autoComplete="off"
                             variant="filled" 
                             sx={{ width: "100%", margin: "0.5rem 0" }}
-                            InputProps={{ endAdornment: <InputAdornment position="end"><VisibilityOffIcon /></InputAdornment> }}
+                            InputProps={{ 
+                                    endAdornment: <InputAdornment 
+                                        className="hover:cursor-pointer" 
+                                        position="end" 
+                                        onClick={() => setShowPassword((prev) => !prev)}
+                                    >
+                                        {showPassword ? passwordIcons.true : passwordIcons.false}
+                                    </InputAdornment>
+                            }}
                         />
                         { password.length !== 0 &&
                             !validPassword &&
