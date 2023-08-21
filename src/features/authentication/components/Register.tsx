@@ -3,9 +3,9 @@ import { Paper, TextField, InputAdornment } from "@mui/material";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { Button } from "@mui/material";
 
-const NAME_REGEX = /^[\p{L}]+ [\p{L}]+$/u;
-const USERID_REGEX = /^[A-Za-z][A-Za-z0-9]{2,}$/;
-const PASSWORD_REGEX = /^[A-Za-z0-9]{3,}$/;
+const NAME_REGEX: RegExp = /^[\p{L}]+ [\p{L}]+$/u;
+const USERID_REGEX: RegExp = /^[A-Za-z][A-Za-z0-9]{2,}$/;
+const PASSWORD_REGEX: RegExp = /^[A-Za-z0-9]{3,}$/;
 
 const Register = () => {
     const [name, setName] = useState<string>("");
@@ -41,14 +41,21 @@ const Register = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        console.log("form submitted");
-        setErrorMessage("Registration not possible!");
+        const verifyName = NAME_REGEX.test(name);
+        const verifyUserId = USERID_REGEX.test(userId);
+        const verifyPassword = PASSWORD_REGEX.test(password);
+        if (!verifyName || !verifyUserId || !verifyPassword) {
+            setErrorMessage("Invalid entry");
+            return;
+        }
+
+        // api call...
     }
 
     return (
         <Paper sx={{ padding: "2rem", width: "20rem", height: "26rem" }} elevation={1}>
             <form onSubmit={handleSubmit} className="h-full flex flex-col justify-between">
-                <div className="flex justify-between items-center">
+                <div className="relative flex justify-between items-center">
                     <h1 className="text-2xl font-bold">Register</h1>
                     <Button 
                         variant="outlined" 
@@ -61,6 +68,7 @@ const Register = () => {
                     >
                             Login?
                     </Button>
+                    <span className="text-sx text-error absolute -bottom-7 left-0">{errorMessage}</span>
                 </div>
                 <div>
                     <div className="relative">
