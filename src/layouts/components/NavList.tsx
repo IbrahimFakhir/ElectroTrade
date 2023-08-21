@@ -23,7 +23,8 @@ const NavList = () => {
                                 padding: 0,
                                 opacity: 0.9,
                                 ":hover": {
-                                    opacity: 1
+                                    opacity: 1,
+                                    backgroundColor: "grey.200"
                                 },
                             }}
                         >

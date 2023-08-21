@@ -6,8 +6,8 @@ export default {
 	],
 	theme: {
 		colors: {
-			customGray: "#DCDCDC",
-			muiBlueMain: "#1976d2"
+			customGrey: "#DCDCDC",
+			muiPrimaryMain: "#1976d2"
 		}
 		,
 		extend: {

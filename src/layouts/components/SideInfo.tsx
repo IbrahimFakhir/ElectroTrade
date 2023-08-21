@@ -6,7 +6,7 @@ const SideInfo = () => {
 
     return (
         <div className="h-full flex flex-col justify-start items-center">
-            <div className="text-xl font-semibold flex justify-center items-center bg-customGray w-20 h-20 rounded-full">
+            <div className="text-xl font-semibold flex justify-center items-center bg-customGrey w-20 h-20 rounded-full">
                 { auth.firstName.charAt(0) }{ auth.lastName.charAt(0) }
             </div>
             <span className="font-roboto mt-1">{auth.firstName} {auth.lastName}</span>

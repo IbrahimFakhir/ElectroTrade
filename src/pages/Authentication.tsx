@@ -1,4 +1,4 @@
-import { Register, Login } from "../features/authentication";
+import { Register } from "../features/authentication";
 
 const Authentication = () => {
     return (
