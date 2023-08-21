@@ -61,7 +61,7 @@ const Register = () => {
     }
 
     return (
-        <Paper sx={{ padding: "2rem", width: "20rem", height: "26rem" }} elevation={1}>
+        <Paper sx={{ padding: "2rem", width: "20rem" }} elevation={1}>
             <form onSubmit={handleSubmit} className="h-full flex flex-col justify-between">
                 <div className="relative flex justify-between items-center">
                     <h1 className="text-2xl font-bold">Register</h1>
@@ -78,7 +78,7 @@ const Register = () => {
                     </Button>
                     <span className="text-sx text-error absolute -bottom-7 left-0">{errorMessage}</span>
                 </div>
-                <div>
+                <div className="mt-8 mb-8">
                     <div className="relative">
                         <TextField
                             id="name"
