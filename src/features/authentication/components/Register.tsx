@@ -1,17 +1,11 @@
 import { useState, useEffect } from "react";
 import { Paper, TextField, InputAdornment } from "@mui/material";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import { passwordIcons } from "../util/passwordIcons";
 import { Button } from "@mui/material";
 
 const NAME_REGEX: RegExp = /^[\p{L}]+ [\p{L}]+$/u;
 const USERID_REGEX: RegExp = /^[A-Za-z][A-Za-z0-9]{2,}$/;
 const PASSWORD_REGEX: RegExp = /^[A-Za-z0-9]{3,}$/;
-
-const passwordIcons = {
-    true: <VisibilityIcon />,
-    false: <VisibilityOffIcon />
-}
 
 const Register = () => {
     const [name, setName] = useState<string>("");
@@ -161,7 +155,7 @@ const Register = () => {
                     <Button 
                         type="submit" 
                         variant="contained" 
-                        sx={{width: "100%" }}
+                        sx={{ width: "100%" }}
                         disabled={ !validName || !validUserId || !validPassword }
                     >
                         Get started
