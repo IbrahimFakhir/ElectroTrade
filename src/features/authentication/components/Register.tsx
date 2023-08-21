@@ -36,7 +36,7 @@ const Register = () => {
 
     useEffect(() => {
         setErrorMessage("");
-    })
+    }, [name, userId, password])
     
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
