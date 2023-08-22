@@ -1,10 +1,13 @@
-import { /* Register, */ Login } from "../features/authentication";
+import { useState } from "react";
+import { Register, Login } from "../features/authentication";
 
 const Authentication = () => {
+    const [hasAccount, setHasAccount] = useState<boolean>(false);
+
     return (
         <div className="flex justify-center items-center h-full">
-            {/* {<Register />} */}
-            {<Login />}
+            { !hasAccount &&  <Register setHasAccount={setHasAccount} /> }
+            { hasAccount && <Login setHasAccount={setHasAccount} /> }
         </div>
     )
 }

@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import { Paper, Button, TextField, InputAdornment } from "@mui/material";
 import { passwordIcons } from "../util/passwordIcons";
 
-const Login = () => {
+type LoginPropsType = {
+    setHasAccount: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Login = ({ setHasAccount }: LoginPropsType) => {
     const [userId, setUserId] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
@@ -26,7 +30,8 @@ const Login = () => {
             <form onSubmit={handleSubmit} className="h-full flex flex-col justify-between">
                 <div className="relative flex justify-between items-center">
                     <h1 className="text-2xl font-bold">Login</h1>
-                    <Button 
+                    <Button
+                        onClick={() => setHasAccount((prev) => !prev)}
                         variant="outlined" 
                         sx={{
                             ":hover": {
@@ -35,7 +40,7 @@ const Login = () => {
                             },
                         }}
                     >
-                            New here?
+                            Register?
                     </Button>
                     <span className="text-sx text-error absolute -bottom-7 left-0">{errorMessage}</span>
                 </div>

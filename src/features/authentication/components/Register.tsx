@@ -7,7 +7,11 @@ const NAME_REGEX: RegExp = /^[\p{L}]+ [\p{L}]+$/u;
 const USERID_REGEX: RegExp = /^[A-Za-z][A-Za-z0-9]{2,}$/;
 const PASSWORD_REGEX: RegExp = /^[A-Za-z0-9]{3,}$/;
 
-const Register = () => {
+type RegisterPropsType = {
+    setHasAccount: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Register = ({ setHasAccount }: RegisterPropsType) => {
     const [name, setName] = useState<string>("");
     const [validName, setValidName] = useState<boolean>(false);
     const [nameFocus, setNameFocus] = useState<boolean>(false);
@@ -59,7 +63,8 @@ const Register = () => {
             <form onSubmit={handleSubmit} className="h-full flex flex-col justify-between">
                 <div className="relative flex justify-between items-center">
                     <h1 className="text-2xl font-bold">Register</h1>
-                    <Button 
+                    <Button
+                        onClick={() => setHasAccount(prev => !prev)}
                         variant="outlined" 
                         sx={{
                             ":hover": {
