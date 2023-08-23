@@ -4,6 +4,8 @@ import { passwordIcons } from "../util/passwordIcons";
 import { Button } from "@mui/material";
 import hasTouchScreen from "../../../utils/has-touchscreen";
 
+import { useNavigate } from "react-router-dom"; // delete later
+
 const NAME_REGEX: RegExp = /^[\p{L}]+ [\p{L}]+$/u;
 const USERID_REGEX: RegExp = /^[A-Za-z][A-Za-z0-9]{2,}$/;
 const PASSWORD_REGEX: RegExp = /^[A-Za-z0-9]{3,}$/;
@@ -28,6 +30,8 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const [errorMessage, setErrorMessage] = useState<string>("");
+
+    const navigate = useNavigate(); // delete later
 
     useEffect(() => {
         setValidName(NAME_REGEX.test(name));
@@ -55,6 +59,8 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
             setErrorMessage("Invalid entry");
             return;
         }
+
+        navigate("/pages/"); // delete later
 
         // api call...
     }
