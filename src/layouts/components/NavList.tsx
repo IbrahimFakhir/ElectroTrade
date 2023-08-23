@@ -24,7 +24,9 @@ const NavList = () => {
                                 opacity: 0.9,
                                 ":hover": {
                                     opacity: 1,
-                                    backgroundColor: "grey.200"
+                                    backgroundColor: {
+                                        md: "grey.200"
+                                    }
                                 },
                             }}
                         >

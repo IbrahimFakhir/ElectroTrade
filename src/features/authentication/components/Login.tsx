@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Paper, Button, TextField, InputAdornment } from "@mui/material";
 import { passwordIcons } from "../util/passwordIcons";
+import hasTouchScreen from "../../../utils/has-touchscreen";
 
 type LoginPropsType = {
     setHasAccount: React.Dispatch<React.SetStateAction<boolean>>
@@ -52,7 +53,7 @@ const Login = ({ setHasAccount }: LoginPropsType) => {
                             required
                             value={userId}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserId(e.target.value)}
-                            autoFocus
+                            {...(hasTouchScreen ? {} : { autoFocus: true })}
                             autoComplete="off"
                             variant="filled"
                             sx={{ width: "100%", margin: "0.5rem 0" }}

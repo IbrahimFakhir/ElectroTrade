@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Paper, TextField, InputAdornment } from "@mui/material";
 import { passwordIcons } from "../util/passwordIcons";
 import { Button } from "@mui/material";
+import hasTouchScreen from "../../../utils/has-touchscreen";
 
 const NAME_REGEX: RegExp = /^[\p{L}]+ [\p{L}]+$/u;
 const USERID_REGEX: RegExp = /^[A-Za-z][A-Za-z0-9]{2,}$/;
@@ -88,7 +89,7 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
                             error={name.length !== 0 && !validName}
                             onFocus={() => setNameFocus(true)}
                             onBlur={() => setNameFocus(false)}
-                            autoFocus
+                            {...(hasTouchScreen ? {} : { autoFocus: true })}
                             autoComplete="off"
                             variant="filled" 
                             sx={{ width: "100%", margin: "0.5rem 0" }}
