@@ -9,6 +9,7 @@ import Market from "./pages/Market";
 import Account from "./pages/Account";
 import AuthLayout from "./layouts/AuthLayout/AuthLayout";
 import Authentication from "./pages/Authentication";
+import Missing from "./pages/Missing";
 import { pages, relativePagesPath } from "./utils/pages";
 
 function App() {
@@ -27,6 +28,8 @@ function App() {
 							<Route path={pages.get("market")?.path} element={<Market />} />
 							<Route path={pages.get("account")?.path} element={<Account />} />
 					</Route>
+
+					<Route path="*" element={<Missing />} />
 				</Routes>
 			</ThemeProvider>
 		</AuthProvider>
