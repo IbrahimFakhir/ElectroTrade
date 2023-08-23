@@ -6,9 +6,13 @@ import hasTouchScreen from "../../../utils/has-touchscreen";
 
 import { useNavigate } from "react-router-dom"; // delete later
 
-const NAME_REGEX: RegExp = /^[\p{L}]+ [\p{L}]+$/u;
-const USERID_REGEX: RegExp = /^[A-Za-z][A-Za-z0-9]{2,}$/;
+const NAME_REGEX: RegExp = /^[A-Za-z]+ [A-Za-z]+$/;
+const USERID_REGEX: RegExp = /^[A-Za-z0-9]{3,}$/;
 const PASSWORD_REGEX: RegExp = /^[A-Za-z0-9]{3,}$/;
+
+const nameErrorText = "Please enter first and last name";
+const userIdErrorText = "At least 3 characters";
+const passwordErrorText = "At least 3 characters";
 
 type RegisterPropsType = {
     setHasAccount: React.Dispatch<React.SetStateAction<boolean>>;
@@ -104,7 +108,7 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
                             !validName &&
                             nameFocus && 
                             <span className="text-xs text-error absolute -bottom-2 left-3">
-                                Please enter first and last name
+                                {nameErrorText}
                             </span>
                         }
                     </div>
@@ -126,7 +130,7 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
                             !validUserId &&
                             userIdFocus &&
                             <span className="text-xs text-error absolute -bottom-2 left-3">
-                                Invalid username
+                                {userIdErrorText}
                             </span> 
                         }
                     </div>
@@ -158,7 +162,7 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
                             !validPassword &&
                             passwordFocus &&
                             <span className="text-xs text-error absolute -bottom-2 left-3">
-                                Invalid password
+                                {passwordErrorText}
                             </span>
                         }
                     </div>
