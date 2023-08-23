@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import { pages, pageIcons } from '../../../utils/pages';
+import hasTouchScreen from '../../../utils/has-touchscreen';
 
 const navLinks = Array.from(pages.values()).filter(page => page.anchorable);
 
@@ -25,9 +26,10 @@ const NavList = () => {
                                 ":hover": {
                                     opacity: 1,
                                     backgroundColor: {
-                                        md: "grey.200"
+                                        md: !hasTouchScreen ? "grey.200" : undefined
                                     }
                                 },
+                                
                             }}
                         >
                             {pageIcons.get(navLink.name)}
