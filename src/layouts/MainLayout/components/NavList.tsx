@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { IconButton } from '@mui/material';
-import { pages, pageIcons } from '../../utils/pages';
+import { pages, pageIcons } from '../../../utils/pages';
 
 const navLinks = Array.from(pages.values()).filter(page => page.anchorable);
 
