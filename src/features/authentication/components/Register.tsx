@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Paper, TextField, InputAdornment } from "@mui/material";
 import { passwordIcons } from "../util/passwordIcons";
 import { Button } from "@mui/material";
@@ -26,6 +26,7 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
     const [passwordFocus, setPasswordFocus] = useState<boolean>(false);
 
     const [showPassword, setShowPassword] = useState<boolean>(false);
+    const inputRef = useRef<HTMLInputElement>();
 
     const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -45,6 +46,14 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
         setErrorMessage("");
     }, [name, userId, password])
     
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, [showPassword])
+    
+    const setPasswordRef = (e: HTMLInputElement) => {
+        inputRef.current = e;
+    }
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -130,6 +139,7 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
                             label="Password"
                             type={showPassword ? "text" : "password"}
                             required
+                            inputRef={setPasswordRef}
                             value={password}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                             error={password.length !== 0 && !validPassword}

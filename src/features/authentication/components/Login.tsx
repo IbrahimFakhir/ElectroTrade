@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Paper, Button, TextField, InputAdornment } from "@mui/material";
 import { passwordIcons } from "../util/passwordIcons";
 import hasTouchScreen from "../../../utils/has-touchscreen";
@@ -14,10 +14,19 @@ const Login = ({ setHasAccount }: LoginPropsType) => {
     const [errorMessage, setErrorMessage] = useState<string>("");
 
     const [showPassword, setShowPassword] = useState<boolean>(false);
+    const inputRef = useRef<HTMLInputElement>();
 
     useEffect(() => {
         setErrorMessage("");
     }, [userId, password])
+
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, [showPassword])
+    
+    const setPasswordRef = (e: HTMLInputElement) => {
+        inputRef.current = e;
+    }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -65,6 +74,7 @@ const Login = ({ setHasAccount }: LoginPropsType) => {
                             label="Password"
                             type={showPassword ? "text" : "password"}
                             required
+                            inputRef={setPasswordRef}
                             value={password}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                             autoComplete="off"
