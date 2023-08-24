@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Paper, TextField, InputAdornment } from "@mui/material";
 import { passwordIcons } from "../util/passwordIcons";
 import { Button } from "@mui/material";
+import useAuth from "../../../hooks/useAuth";
 import hasTouchScreen from "../../../utils/has-touchscreen";
 
 import { useNavigate } from "react-router-dom"; // delete later
@@ -19,6 +20,8 @@ type RegisterPropsType = {
 }
 
 const Register = ({ setHasAccount }: RegisterPropsType) => {
+    const { setAuth } = useAuth();
+
     const [name, setName] = useState<string>("");
     const [validName, setValidName] = useState<boolean>(false);
     const [nameFocus, setNameFocus] = useState<boolean>(false);
@@ -64,7 +67,18 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
             return;
         }
 
-        navigate("/pages"); // delete later
+        // delete later
+        setAuth({
+            name: name,
+            userId: userId,
+            roles: [],
+            accessToken: ""
+        })
+        setName("");
+        setUserId("");
+        setPassword("");
+
+        navigate("/pages");
 
         // api call...
     }

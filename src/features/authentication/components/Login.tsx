@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 import { Paper, Button, TextField, InputAdornment } from "@mui/material";
 import { passwordIcons } from "../util/passwordIcons";
 import hasTouchScreen from "../../../utils/has-touchscreen";
@@ -8,6 +10,12 @@ type LoginPropsType = {
 }
 
 const Login = ({ setHasAccount }: LoginPropsType) => {
+    const { setAuth } = useAuth();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location?.state?.from?.pathname || "/pages"
+
     const [userId, setUserId] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
@@ -22,8 +30,17 @@ const Login = ({ setHasAccount }: LoginPropsType) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        console.log("form submitted!");
-        setErrorMessage("debug error");
+        // delete later ?
+        setAuth({
+            name: "Login Name",
+            userId: userId,
+            roles: [],
+            accessToken: ""
+        })
+        setUserId("");
+        setPassword("");
+
+        navigate(from, { replace: true });
     }
 
     return (

@@ -9,6 +9,7 @@ import Market from "./pages/Market";
 import Account from "./pages/Account";
 import AuthLayout from "./layouts/AuthLayout/AuthLayout";
 import Authentication from "./pages/Authentication";
+import { RequireAuth } from "./features/authentication";
 import Missing from "./pages/Missing";
 import { pages, relativePagesPath } from "./utils/pages";
 
@@ -22,13 +23,14 @@ function App() {
 						<Route index element={ <Authentication /> } />
 					</Route>
 					{/* protect these routes */}
-					<Route path={relativePagesPath} element={<Layout />}>
-							<Route index element={<Welcome />} />
-							<Route path={pages.get("portfolio")?.path} element={<Portfolio />} />
-							<Route path={pages.get("market")?.path} element={<Market />} />
-							<Route path={pages.get("account")?.path} element={<Account />} />
+					<Route element={<RequireAuth />}>
+						<Route path={relativePagesPath} element={<Layout />}>
+								<Route index element={<Welcome />} />
+								<Route path={pages.get("portfolio")?.path} element={<Portfolio />} />
+								<Route path={pages.get("market")?.path} element={<Market />} />
+								<Route path={pages.get("account")?.path} element={<Account />} />
+						</Route>
 					</Route>
-
 					<Route path="*" element={<Missing />} />
 				</Routes>
 			</ThemeProvider>
