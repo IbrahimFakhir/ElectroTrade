@@ -17,7 +17,6 @@ import Unauthorized from "./pages/Unauthorized";
 import Admin from "./pages/Admin";
 
 function App() {
-	console.log(pages.get("portfolio")?.path)
 	return (
 		<AuthProvider>
 			<ThemeProvider theme={theme}>
