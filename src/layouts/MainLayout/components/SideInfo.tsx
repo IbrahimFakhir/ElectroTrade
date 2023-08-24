@@ -1,8 +1,7 @@
-import { useContext } from "react";
-import { AuthContext } from '../../../context/AuthContext';
+import useAuth from "../../../hooks/useAuth";
 
 const SideInfo = () => {
-    const { auth } = useContext(AuthContext);
+    const { auth } = useAuth();
 
     return (
         <div className="h-full flex flex-col justify-start items-center">
