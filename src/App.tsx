@@ -22,12 +22,12 @@ function App() {
 		<AuthProvider>
 			<ThemeProvider theme={theme}>
 				<Routes>
+
 					<Route path={pages.get("authentication")?.path} element={<AuthLayout />}>
 						<Route index element={ <Authentication /> } />
 						<Route path={pages.get("unauthorized")?.path} element={<Unauthorized />} />
 					</Route>
-					{/* protect these routes */}
-					
+
 					<Route path={relativePagesPath} element={<Layout />}>
 						<Route element={<RequireAuth allowedRoles={[1, 2]} />}>
 							<Route index element={<Welcome />} />
@@ -36,12 +36,15 @@ function App() {
 							<Route path={pages.get("account")?.path} element={<Account />} />
 						</Route >
 					</Route>
+
 					<Route path={relativeAdminPath} element={<Layout />}>
 						<Route element={<RequireAuth allowedRoles={[2]} />}>
 							<Route index element={<Admin />} />
 						</Route>
 					</Route>
+
 					<Route path="*" element={<Missing />} />
+					
 				</Routes>
 			</ThemeProvider>
 		</AuthProvider>
