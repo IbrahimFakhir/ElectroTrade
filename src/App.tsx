@@ -12,6 +12,7 @@ import Authentication from "./pages/Authentication";
 import { RequireAuth } from "./features/authentication";
 import Missing from "./pages/Missing";
 import { pages, relativePagesPath } from "./utils/pages";
+import Unauthorized from "./pages/Unauthorized";
 
 function App() {
 	console.log(pages.get("portfolio")?.path)
@@ -19,11 +20,12 @@ function App() {
 		<AuthProvider>
 			<ThemeProvider theme={theme}>
 				<Routes>
-					<Route path="/" element={<AuthLayout />}>
+					<Route path={pages.get("authentication")?.path} element={<AuthLayout />}>
 						<Route index element={ <Authentication /> } />
+						<Route path={pages.get("unauthorized")?.path} element={<Unauthorized />} />
 					</Route>
 					{/* protect these routes */}
-					<Route element={<RequireAuth />}>
+					<Route element={<RequireAuth allowedRoles={[1]} />}>
 						<Route path={relativePagesPath} element={<Layout />}>
 								<Route index element={<Welcome />} />
 								<Route path={pages.get("portfolio")?.path} element={<Portfolio />} />

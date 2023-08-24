@@ -3,7 +3,7 @@ import { Dispatch, ReactNode, SetStateAction, createContext, useState } from "re
 export type Auth = {
     name: string | null,
     userId: string | null,
-    roles: string[],
+    roles: number[],
     accessToken: string | null
 }
 
