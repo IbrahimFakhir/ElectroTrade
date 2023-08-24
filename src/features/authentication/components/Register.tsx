@@ -64,7 +64,7 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
             return;
         }
 
-        navigate("/pages/"); // delete later
+        navigate("/pages"); // delete later
 
         // api call...
     }

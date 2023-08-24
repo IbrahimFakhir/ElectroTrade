@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Register, Login } from "../features/authentication";
 
 const Authentication = () => {
-    const [hasAccount, setHasAccount] = useState<boolean>(false);
+    const [hasAccount, setHasAccount] = useState<boolean>(true);
 
     return (
         <div className="flex justify-center items-center h-full">
