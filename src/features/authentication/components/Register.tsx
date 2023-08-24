@@ -71,7 +71,7 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
         setAuth({
             name: name,
             userId: userId,
-            roles: [1],
+            roles: [2],
             accessToken: ""
         })
         setName("");

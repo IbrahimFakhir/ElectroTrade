@@ -1,6 +1,14 @@
+import { Link } from "react-router-dom";
+import { pages } from "../utils/pages";
+
 const Account = () => {
     return (
-        <div>Account</div>
+        <div>
+            <div>Account</div>
+            <Link to={pages.get("admin")!.path}>
+				Go to Admin
+			</Link>
+        </div>
     )
 }
 

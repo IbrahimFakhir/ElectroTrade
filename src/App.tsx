@@ -11,8 +11,10 @@ import AuthLayout from "./layouts/AuthLayout/AuthLayout";
 import Authentication from "./pages/Authentication";
 import { RequireAuth } from "./features/authentication";
 import Missing from "./pages/Missing";
-import { pages, relativePagesPath } from "./utils/pages";
+import { pages, relativeAdminPath, relativePagesPath } from "./utils/pages";
 import Unauthorized from "./pages/Unauthorized";
+
+import Admin from "./pages/Admin";
 
 function App() {
 	console.log(pages.get("portfolio")?.path)
@@ -25,12 +27,18 @@ function App() {
 						<Route path={pages.get("unauthorized")?.path} element={<Unauthorized />} />
 					</Route>
 					{/* protect these routes */}
-					<Route element={<RequireAuth allowedRoles={[1]} />}>
-						<Route path={relativePagesPath} element={<Layout />}>
-								<Route index element={<Welcome />} />
-								<Route path={pages.get("portfolio")?.path} element={<Portfolio />} />
-								<Route path={pages.get("market")?.path} element={<Market />} />
-								<Route path={pages.get("account")?.path} element={<Account />} />
+					
+					<Route path={relativePagesPath} element={<Layout />}>
+						<Route element={<RequireAuth allowedRoles={[1, 2]} />}>
+							<Route index element={<Welcome />} />
+							<Route path={pages.get("portfolio")?.path} element={<Portfolio />} />
+							<Route path={pages.get("market")?.path} element={<Market />} />
+							<Route path={pages.get("account")?.path} element={<Account />} />
+						</Route >
+					</Route>
+					<Route path={relativeAdminPath} element={<Layout />}>
+						<Route element={<RequireAuth allowedRoles={[2]} />}>
+							<Route index element={<Admin />} />
 						</Route>
 					</Route>
 					<Route path="*" element={<Missing />} />
