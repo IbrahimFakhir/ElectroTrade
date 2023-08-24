@@ -1,7 +1,10 @@
 import { Dispatch, ReactNode, SetStateAction, createContext, useState } from "react";
 
 export type Auth = {
-    name: string
+    name: string | null,
+    userId: string | null,
+    roles: string[],
+    accessToken: string | null
 }
 
 export interface AuthContextInterface {
@@ -13,7 +16,10 @@ export interface AuthContextInterface {
 
 const defaultState = {
     auth: {
-        name: ""
+        name: null,
+        userId: null,
+        roles: [],
+        accessToken: null
     },
     setAuth: () => {}
 } as AuthContextInterface
@@ -25,7 +31,7 @@ type AuthProviderProps = {
 }
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
-    const [auth, setAuth] = useState<Auth>({ name: "John Doe" })
+    const [auth, setAuth] = useState<Auth>({ name: null, userId: null, roles: [], accessToken: null })
 
     return (
         <AuthContext.Provider value={{ auth, setAuth }} >
