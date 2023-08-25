@@ -21,8 +21,8 @@ const Chart = () => {
     ]
 
     return (
-        <div>
-            <ReactApexChart options={options} series={series} type="line" width={320}  />
+        <div className="w-[20.4rem]">
+            <ReactApexChart options={options} series={series} type="line" width={"100%"}  />
         </div>
     )
 }
