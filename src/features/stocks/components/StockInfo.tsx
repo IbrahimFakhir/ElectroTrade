@@ -9,7 +9,7 @@ const StockInfo = ({ stockName, stockPrice }: StockInfoPropsType) => {
     return (
         <div className="w-full px-4">
             <h1 className="font-semibold">{stockName}</h1>
-            <p>${stockPrice}</p>
+            <p className="text-secondaryText">${stockPrice}</p>
             <div className="flex mt-2">
                 <Button variant="contained">
                     Buy

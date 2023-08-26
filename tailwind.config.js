@@ -6,6 +6,8 @@ export default {
 	],
 	theme: {
 		colors: {
+			primaryText: "#000000",
+			secondaryText: "#AAAAAA",
 			customGrey: "#DCDCDC",
 			muiPrimaryMain: "#1976d2",
 			error: "rgb(220 38 38)"
