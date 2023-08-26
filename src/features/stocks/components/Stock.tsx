@@ -4,16 +4,25 @@ import StockInfo from "./StockInfo";
 import stockValues from "../utils/stock-values";
 import last30DaysFormatted from "../utils/last-30-days";
 
-const stock = {
+type stockType = {
+    name: string,
+    categories: string[],
+    values: number[]
+}
+
+const stock: stockType = {
     name: "test stock",
+    categories: last30DaysFormatted,
     values: stockValues
 }
 
 const Stock = () => {
+    console.log(stock.categories)
+
     return (
         <Paper sx={{ padding: "1rem" }}>
-            <StockInfo />
-            <Chart last30DaysFormatted={last30DaysFormatted} stockValues={stock.values} />
+            <StockInfo name={stock.name} />
+            <Chart stockCategories={stock.categories} stockValues={stock.values} />
         </Paper>
     )
 }

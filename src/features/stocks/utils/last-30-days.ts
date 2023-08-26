@@ -16,4 +16,4 @@ for (let i: number = 29; i >= 0; i--) {
     last30DaysFormatted.push(formattedDate);
 }
 
-export default last30DaysFormatted
+export default last30DaysFormatted;

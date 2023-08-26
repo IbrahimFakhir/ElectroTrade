@@ -1,17 +1,17 @@
 import ReactApexChart from "react-apexcharts";
 
 type ChartPropsType = {
-    last30DaysFormatted: string[]
+    stockCategories: string[]
     stockValues: number[]
 }
 
-const Chart = ({ last30DaysFormatted, stockValues }: ChartPropsType) => {
+const Chart = ({ stockCategories, stockValues }: ChartPropsType) => {
     const options = {
         chart: {
             id: "stock name"
         },
         xaxis: {
-            categories: last30DaysFormatted,
+            categories: stockCategories,
             tickAmount: 4
         }
     }
@@ -24,7 +24,7 @@ const Chart = ({ last30DaysFormatted, stockValues }: ChartPropsType) => {
     ]
 
     return (
-        <div className="w-[20.4rem]">
+        <div className="w-[20.4rem] h-60">
             <ReactApexChart options={options} series={series} type="line" height={"100%"} />
         </div>
     )
