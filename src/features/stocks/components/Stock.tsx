@@ -17,12 +17,12 @@ const stock: stockType = {
 }
 
 const Stock = () => {
-    console.log(stock.categories)
-
     return (
         <Paper sx={{ padding: "1rem" }}>
-            <StockInfo name={stock.name} />
-            <Chart stockCategories={stock.categories} stockValues={stock.values} />
+            <div className="flex flex-col items-center">
+                <StockInfo stockName={stock.name} stockPrice={stock.values[stock.values.length - 1]} />
+                <Chart stockCategories={stock.categories} stockValues={stock.values} />
+            </div>
         </Paper>
     )
 }

@@ -1,11 +1,23 @@
+import { Button } from "@mui/material";
+
 type StockInfoPropsType = {
-    name: string
+    stockName: string,
+    stockPrice: number
 }
 
-const StockInfo = ({ name }: StockInfoPropsType) => {
+const StockInfo = ({ stockName, stockPrice }: StockInfoPropsType) => {
     return (
-        <div>
-            <h1>{name}</h1>
+        <div className="w-full px-4">
+            <h1 className="font-semibold">{stockName}</h1>
+            <p>${stockPrice}</p>
+            <div className="flex mt-2">
+                <Button variant="contained">
+                    Buy
+                </Button>
+                <Button variant="contained" color="error" sx={{ marginLeft: "0.5rem" }}>
+                    Sell
+                </Button>
+            </div>
         </div>
     )
 }
