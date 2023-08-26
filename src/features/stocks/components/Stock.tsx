@@ -1,11 +1,19 @@
 import Paper from "@mui/material/Paper/Paper"
 import Chart from "./Chart";
+import StockInfo from "./StockInfo";
+import stockValues from "../utils/stock-values";
+import last30DaysFormatted from "../utils/last-30-days";
+
+const stock = {
+    name: "test stock",
+    values: stockValues
+}
 
 const Stock = () => {
     return (
         <Paper sx={{ padding: "1rem" }}>
-            <h1 className="m-4">Stock</h1>
-            <Chart />
+            <StockInfo />
+            <Chart last30DaysFormatted={last30DaysFormatted} stockValues={stock.values} />
         </Paper>
     )
 }
