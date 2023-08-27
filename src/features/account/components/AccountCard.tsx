@@ -5,7 +5,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import TextField from "../../../components/TextField";
 
 const handleLogout = () => {
-    console.log("logged out!");
+    alert("Logged out!");
 }
 
 const AccountCard = () => {
