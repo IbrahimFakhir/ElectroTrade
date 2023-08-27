@@ -4,14 +4,13 @@ const Market = () => {
 	return (
 		<div className="h-full p-4">
 			<h1 className="text-3xl font-semibold mb-4">Market</h1>
-			<div className="grid gap-2 h-[90%] overflow-y-auto">
-				<div>
+			<div className="max-h-[90%] grid md:place-items-center overflow-y-auto">
+				<div className="md:w-[36rem]">
+					<Stock />
 					<Stock />
 				</div>
-				<div>
+				<div className="md:w-[36rem]">
 					<Stock />
-				</div>
-				<div>
 					<Stock />
 				</div>
 			</div>
