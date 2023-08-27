@@ -34,6 +34,7 @@ const Login = ({ setHasAccount }: LoginPropsType) => {
         setAuth({
             name: "Login Name",
             userId: userId,
+            balance: 150000,
             roles: [],
             accessToken: ""
         })
