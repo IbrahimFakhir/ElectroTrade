@@ -30,7 +30,7 @@ const AccountCard = () => {
             <TextField>
                 <div className="flex justify-between mb-1">
                     <span className="font-bold">Balance</span>
-                    <span>$10000</span>
+                    <span>{auth.balance}</span>
                 </div>
                 <div className="flex justify-between mb-1">
                     <span className="font-bold">IBAN</span>
