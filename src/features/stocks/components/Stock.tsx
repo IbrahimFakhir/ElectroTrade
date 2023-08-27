@@ -18,7 +18,15 @@ const stock: stockType = {
 
 const Stock = () => {
     return (
-        <Paper sx={{ padding: "1rem", marginBottom: "0.5rem" }}>
+        <Paper 
+            sx={{
+                padding: "1rem",
+                marginBottom: {
+                    xs: "0.5rem",
+                    md: "1rem"
+                }
+            }}
+        >
             <div className="flex flex-col md:flex-row items-center md:items-stretch">
                 <StockInfo stockName={stock.name} stockPrice={stock.values[stock.values.length - 1]} />
                 <Chart stockCategories={stock.categories} stockValues={stock.values} />
