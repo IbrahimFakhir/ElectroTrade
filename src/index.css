@@ -2,14 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* div::-webkit-scrollbar {
-    width: 0.15rem;
+@media only screen and (min-width: 768px) {
+    div::-webkit-scrollbar {
+        width: 0.15rem;
+    }
+    
+    div::-webkit-scrollbar-track {
+        background: #DCDCDC;
+    }
+    
+    div::-webkit-scrollbar-thumb {
+        background: lightgray;
+    }
 }
-
-div::-webkit-scrollbar-track {
-    background: #DCDCDC;
-}
-
-div::-webkit-scrollbar-thumb {
-    background: gray;
-} */
