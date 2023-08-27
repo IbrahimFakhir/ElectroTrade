@@ -10,12 +10,8 @@ const Market = () => {
 					<Stock />
 					<Stock />
 					<Stock />
-					<Stock />
-					<Stock />
 				</div>
 				<div className="md:w-[34rem] xl:w-[28rem] 2xl:w-[30rem]">
-					<Stock />
-					<Stock />
 					<Stock />
 					<Stock />
 					<Stock />
