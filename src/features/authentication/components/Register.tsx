@@ -3,6 +3,9 @@ import { Paper, TextField, InputAdornment } from "@mui/material";
 import { passwordIcons } from "../util/passwordIcons";
 import { Button } from "@mui/material";
 import useAuth from "../../../hooks/useAuth";
+import axios from "../../../lib/axios";
+import { AxiosError } from "axios";
+import { REGISTER_URL } from "../../../lib/api-paths";
 import hasTouchScreen from "../../../utils/has-touchscreen";
 
 import { useNavigate } from "react-router-dom"; // delete later
@@ -20,6 +23,17 @@ type RegisterPropsType = {
 }
 
 const Register = ({ setHasAccount }: RegisterPropsType) => {
+    const testFun = async () => {
+        try {
+            const response = await axios.get("/user/data");
+
+            console.log(response?.data)
+        }
+        catch (err) {
+            console.log("error");
+        }
+    }
+    
     const { setAuth } = useAuth();
 
     const [name, setName] = useState<string>("");
@@ -56,7 +70,7 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
         setErrorMessage("");
     }, [name, userId, password])
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const verifyName = NAME_REGEX.test(name);
@@ -68,20 +82,53 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
         }
 
         // delete later
-        setAuth({
+        /* setAuth({
             name: name,
             userId: userId,
             balance: 150000,
             roles: [2],
             accessToken: ""
-        })
-        setName("");
-        setUserId("");
-        setPassword("");
+        }) */
 
-        navigate("/pages");
+        try {
+            const response = await axios.post(
+                REGISTER_URL,
+                JSON.stringify({ name, email: userId, password }),
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+            console.log(JSON.stringify(response?.data));
 
-        // api call...
+            const accessToken = response?.data?.accessToken;
+            setAuth({ 
+                name: name, 
+                userId: userId, 
+                balance: 10000, 
+                roles: [2], 
+                accessToken: accessToken 
+            })
+
+            setName("");
+            setUserId("");
+            setPassword("");
+            
+            navigate("/pages");
+        }
+        catch (err) {
+            /* type assertion necessary? */
+            const axiosError = err as AxiosError
+            if (!axiosError.response) {
+                setErrorMessage('No Server Response');
+            }
+            else if (axiosError.response?.status === 400) {
+                setErrorMessage('Missing Username or Password');
+            }
+            else {
+                setErrorMessage('Login Failed');
+            }
+        }
     }
 
     return (
@@ -193,6 +240,7 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
                     </Button>
                 </div>
             </form>
+            <button onClick={testFun}>test</button>
         </Paper>
     )
 }
