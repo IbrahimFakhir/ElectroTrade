@@ -4,6 +4,6 @@ const REGISTER_URL = "/api/v1/auth/register";
 
 const LOGIN_URL = "/api/v1/auth/authenticate";
 
-const REFRESH_URL = "/refresh";
+const REFRESH_URL = "/api/v1/auth/refresh-token";
 
 export { BASE_URL, REGISTER_URL, LOGIN_URL, REFRESH_URL };
