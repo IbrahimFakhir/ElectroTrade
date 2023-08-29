@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import useAuth from "../hooks/useAuth";
+import { useNavigate, useLocation } from "react-router-dom";
+import { pages } from "../utils/pages";
 
 const Portfolio = () => {
     const [demo, setDemo] = useState();
     const [demoBool, setDemoBool] = useState<boolean>(false);
+
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const { auth } = useAuth();
 
@@ -29,6 +34,7 @@ const Portfolio = () => {
             }
             catch (err) {
                 console.log(err);
+                navigate(pages.get("authentication")!.path, { state: { from: location }, replace: true });
             }
         }
 

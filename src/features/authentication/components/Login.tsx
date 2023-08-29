@@ -7,6 +7,7 @@ import { Paper, Button, TextField, InputAdornment } from "@mui/material";
 import { passwordIcons } from "../util/passwordIcons";
 import hasTouchScreen from "../../../utils/has-touchscreen";
 import { AxiosError } from "axios";
+import { relativePagesPath } from "../../../utils/pages";
 
 type LoginPropsType = {
     setHasAccount: React.Dispatch<React.SetStateAction<boolean>>
@@ -17,7 +18,7 @@ const Login = ({ setHasAccount }: LoginPropsType) => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location?.state?.from?.pathname || "/pages"
+    const from = location?.state?.from?.pathname || relativePagesPath;
 
     const [userId, setUserId] = useState<string>("");
     const [password, setPassword] = useState<string>("");
