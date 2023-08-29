@@ -7,8 +7,7 @@ import axios from "../../../lib/axios";
 import { AxiosError } from "axios";
 import { REGISTER_URL } from "../../../lib/api-paths";
 import hasTouchScreen from "../../../utils/has-touchscreen";
-
-import { useNavigate } from "react-router-dom"; // delete later
+import { useNavigate } from "react-router-dom";
 
 const NAME_REGEX: RegExp = /^[A-Za-z]+ [A-Za-z]+$/;
 const USERID_REGEX: RegExp = /^[A-Za-z0-9]{3,}$/;
@@ -23,17 +22,6 @@ type RegisterPropsType = {
 }
 
 const Register = ({ setHasAccount }: RegisterPropsType) => {
-    const testFun = async () => {
-        try {
-            const response = await axios.get("/user/data");
-
-            console.log(response?.data)
-        }
-        catch (err) {
-            console.log("error");
-        }
-    }
-    
     const { setAuth } = useAuth();
 
     const [name, setName] = useState<string>("");
@@ -52,7 +40,7 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
 
     const [errorMessage, setErrorMessage] = useState<string>("");
 
-    const navigate = useNavigate(); // delete later
+    const navigate = useNavigate();
 
     useEffect(() => {
         setValidName(NAME_REGEX.test(name));
@@ -80,15 +68,6 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
             setErrorMessage("Invalid entry");
             return;
         }
-
-        // delete later
-        /* setAuth({
-            name: name,
-            userId: userId,
-            balance: 150000,
-            roles: [2],
-            accessToken: ""
-        }) */
 
         try {
             const response = await axios.post(
@@ -240,7 +219,6 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
                     </Button>
                 </div>
             </form>
-            <button onClick={testFun}>test</button>
         </Paper>
     )
 }

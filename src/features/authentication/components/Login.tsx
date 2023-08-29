@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
+import axios from "../../../lib/axios";
+import { LOGIN_URL } from "../../../lib/api-paths";
 import { Paper, Button, TextField, InputAdornment } from "@mui/material";
 import { passwordIcons } from "../util/passwordIcons";
 import hasTouchScreen from "../../../utils/has-touchscreen";
+import { AxiosError } from "axios";
 
 type LoginPropsType = {
     setHasAccount: React.Dispatch<React.SetStateAction<boolean>>
@@ -27,21 +30,44 @@ const Login = ({ setHasAccount }: LoginPropsType) => {
         setErrorMessage("");
     }, [userId, password])
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        // delete later ?
-        setAuth({
-            name: "Login Name",
-            userId: userId,
-            balance: 150000,
-            roles: [],
-            accessToken: ""
-        })
-        setUserId("");
-        setPassword("");
+        try {
+            const response = await axios.post(
+                LOGIN_URL,
+                JSON.stringify({ email: userId, password }),
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            );
+            console.log(JSON.stringify(response?.data));
 
-        navigate(from, { replace: true });
+            const name: string = response?.data?.name;
+            const accessToken: string = response?.data?.accessToken;
+            setAuth({
+                name: name,
+                userId: userId,
+                balance: 100000,
+                roles: [2],
+                accessToken: accessToken
+            })
+
+            setUserId("");
+            setPassword("");
+    
+            navigate(from, { replace: true });
+        }
+        catch (err) {
+            const axiosError = err as AxiosError;
+            if (!axiosError.response) {
+                setErrorMessage('No Server Response');
+            }
+            else {
+                setErrorMessage('Login Failed');
+            }
+        }
     }
 
     return (
