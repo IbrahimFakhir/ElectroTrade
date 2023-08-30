@@ -8,6 +8,7 @@ import { passwordIcons } from "../util/passwordIcons";
 import hasTouchScreen from "../../../utils/has-touchscreen";
 import { AxiosError } from "axios";
 import { relativePagesPath } from "../../../utils/pages";
+import rolesMapper from "../util/rolesMapper";
 
 type LoginPropsType = {
     setHasAccount: React.Dispatch<React.SetStateAction<boolean>>
@@ -47,13 +48,14 @@ const Login = ({ setHasAccount }: LoginPropsType) => {
 
             const name: string = response?.data?.name;
             const balance: number = response?.data?.balance;
-            console.log(typeof balance);
+            const roles: number[] = [rolesMapper.get(response?.data?.role) || 2];
+            console.log(roles);
             const accessToken: string = response?.data?.accessToken;
             setAuth({
                 name: name,
                 userId: userId,
                 balance: balance,
-                roles: [2],
+                roles: roles,
                 accessToken: accessToken
             });
 

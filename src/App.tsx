@@ -28,7 +28,7 @@ function App() {
 					</Route>
 
 					<Route path={relativePagesPath} element={<Layout />}>
-						<Route element={<RequireAuth allowedRoles={[1, 2]} />}>
+						<Route element={<RequireAuth allowedRoles={[0, 1, 2]} />}>
 							<Route index element={<Welcome />} />
 							<Route path={pages.get("portfolio")?.path} element={<Portfolio />} />
 							<Route path={pages.get("market")?.path} element={<Market />} />
@@ -37,7 +37,7 @@ function App() {
 					</Route>
 
 					<Route path={relativeAdminPath} element={<Layout />}>
-						<Route element={<RequireAuth allowedRoles={[2]} />}>
+						<Route element={<RequireAuth allowedRoles={[0]} />}>
 							<Route index element={<Admin />} />
 						</Route>
 					</Route>
