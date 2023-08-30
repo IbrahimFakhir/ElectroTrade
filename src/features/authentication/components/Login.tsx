@@ -46,14 +46,16 @@ const Login = ({ setHasAccount }: LoginPropsType) => {
             console.log(JSON.stringify(response?.data));
 
             const name: string = response?.data?.name;
+            const balance: number = response?.data?.balance;
+            console.log(typeof balance);
             const accessToken: string = response?.data?.accessToken;
             setAuth({
                 name: name,
                 userId: userId,
-                balance: 100000,
+                balance: balance,
                 roles: [2],
                 accessToken: accessToken
-            })
+            });
 
             setUserId("");
             setPassword("");

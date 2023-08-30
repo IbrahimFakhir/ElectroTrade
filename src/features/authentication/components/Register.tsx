@@ -80,14 +80,15 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
             );
             console.log(JSON.stringify(response?.data));
 
+            const balance = response?.data?.balance;
             const accessToken = response?.data?.accessToken;
             setAuth({ 
                 name: name, 
                 userId: userId, 
-                balance: 10000, 
+                balance: balance, 
                 roles: [2], 
                 accessToken: accessToken 
-            })
+            });
 
             setName("");
             setUserId("");
