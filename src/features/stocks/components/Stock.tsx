@@ -21,10 +21,10 @@ const Stock = () => {
         <Paper 
             sx={{
                 padding: "1rem",
-                marginBottom: {
+                /* marginBottom: {
                     xs: "0.5rem",
                     md: "1rem"
-                }
+                } */
             }}
         >
             <div className="flex flex-col md:flex-row items-center md:items-stretch">
