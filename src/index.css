@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 0px) {
     div::-webkit-scrollbar {
         width: 0.15rem;
     }
