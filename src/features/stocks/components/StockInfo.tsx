@@ -12,7 +12,7 @@ const StockInfo = ({ stockName, stockPrice }: StockInfoPropsType) => {
                 <h1 className="font-semibold text-xl">{stockName}</h1>
                 <p className="text-secondaryText">${stockPrice}</p>
             </div>
-            <div className="flex md:flex-col gap-3 mt-2 md:mb-8">
+            <div className="flex justify-between md:flex-col gap-3 mt-2 md:mb-8">
                 <Button 
                     variant="contained" 
                     color="error"
