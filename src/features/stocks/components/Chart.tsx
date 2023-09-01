@@ -24,7 +24,7 @@ const Chart = ({ stockCategories, stockValues }: ChartPropsType) => {
     ]
 
     return (
-        <div className="w-4/5 h-60">
+        <div className="h-60 md:h-72 md:w-full">
             <ReactApexChart options={options} series={series} type="line" height={"100%"} />
         </div>
     )
