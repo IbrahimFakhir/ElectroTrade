@@ -6,4 +6,6 @@ const LOGIN_URL = "/auth/authenticate";
 
 const REFRESH_URL = "/auth/refresh-token";
 
-export { BASE_URL, REGISTER_URL, LOGIN_URL, REFRESH_URL };
+const STOCKS_URL = "/market/data";
+
+export { BASE_URL, REGISTER_URL, LOGIN_URL, REFRESH_URL, STOCKS_URL };

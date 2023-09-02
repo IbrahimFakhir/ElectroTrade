@@ -49,7 +49,6 @@ const Login = ({ setHasAccount }: LoginPropsType) => {
             const name: string = response?.data?.name;
             const balance: number = response?.data?.balance;
             const roles: number[] = [rolesMapper.get(response?.data?.role) || 2];
-            console.log(roles);
             const accessToken: string = response?.data?.accessToken;
             setAuth({
                 name: name,
