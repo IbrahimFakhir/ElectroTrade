@@ -1,22 +1,14 @@
 import Paper from "@mui/material/Paper/Paper"
 import Chart from "./Chart";
 import StockInfo from "./StockInfo";
-import stockValues from "../utils/stock-values";
-import last30DaysFormatted from "../utils/last-30-days";
 
-type stockType = {
+type StockPropsType = {
     name: string,
-    categories: string[],
-    values: number[]
+    timestamps: string[],
+    priceHistory: number[]
 }
 
-const stock: stockType = {
-    name: "test stock",
-    categories: last30DaysFormatted,
-    values: stockValues
-}
-
-const Stock = () => {
+const Stock = ({ name, timestamps, priceHistory }: StockPropsType) => {
     return (
         <Paper 
             sx={{
@@ -24,8 +16,8 @@ const Stock = () => {
             }}
         >
             <div className="flex flex-col md:flex-row items-center md:items-stretch">
-                <StockInfo stockName={stock.name} stockPrice={stock.values[stock.values.length - 1]} />
-                <Chart stockCategories={stock.categories} stockValues={stock.values} />
+                <StockInfo stockName={name} stockPrice={priceHistory[priceHistory.length - 1]} />
+                <Chart stockCategories={timestamps} stockValues={priceHistory} />
             </div>
         </Paper>
     )
