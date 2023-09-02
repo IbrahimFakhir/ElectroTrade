@@ -16,6 +16,8 @@ type StockDataType = {
 
 const Market = () => {
 	const [stockData, setStockData] = useState<StockDataType | null>(null);
+
+	const [test, setTest] = useState(false);
 	
 	useEffect(() => {
 		let isMounted = true;
@@ -46,11 +48,14 @@ const Market = () => {
 			isMounted = false;
 			controller.abort();
 		}
-	}, [])
+	}, [test])
 	
 	return (
 		<div className="h-full md:mx-auto md:w-4/5 pt-6 md:pt-10 px-6 md:px-8">
-			<h1 className="text-3xl font-medium px-2 md:px-0 mb-4">Market</h1>
+			<div className="flex justify-between">
+				<h1 className="text-3xl font-medium px-2 md:px-0 mb-4">Market</h1>
+				<button onClick={() => setTest(prev => !prev)} className="bg-secondaryText rounded">test fetch</button>
+			</div>
 			{/* alternative: md:justify-center 2xl:justify-between */}
 			<div className="max-h-[90%] overflow-y-auto flex md:grid flex-col md:grid-cols-[repeat(auto-fill,_36rem)] md:grid-rows-[repeat(auto-fill)] md:justify-evenly md:gap-x-2 gap-y-4 px-2">
 				{
