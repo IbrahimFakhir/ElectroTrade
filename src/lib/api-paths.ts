@@ -8,4 +8,6 @@ const REFRESH_URL = "/auth/refresh-token";
 
 const STOCKS_URL = "/market/data";
 
-export { BASE_URL, REGISTER_URL, LOGIN_URL, REFRESH_URL, STOCKS_URL };
+const STOCK_AMOUNT_URL = "/user/info";
+
+export { BASE_URL, REGISTER_URL, LOGIN_URL, REFRESH_URL, STOCKS_URL, STOCK_AMOUNT_URL };

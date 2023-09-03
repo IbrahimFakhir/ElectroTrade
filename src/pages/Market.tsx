@@ -60,7 +60,8 @@ const Market = () => {
 			<div className="max-h-[90%] overflow-y-auto flex md:grid flex-col md:grid-cols-[repeat(auto-fill,_36rem)] md:grid-rows-[repeat(auto-fill)] md:justify-evenly md:gap-x-2 gap-y-4 px-2">
 				{
 					stockData && stockData.stocks.map((stock, index) => 
-						<Stock 
+						<Stock
+							id={stock.id}
 							key={index}
 							name={stock.name}
 							timestamps={stockData?.timestamps}
