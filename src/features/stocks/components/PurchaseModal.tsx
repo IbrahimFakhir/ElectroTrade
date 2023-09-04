@@ -1,7 +1,8 @@
 import { useState, MouseEvent, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
-import { STOCK_AMOUNT_URL } from "../../../lib/api-paths";
+import { STOCK_AMOUNT_URL, BUY_STOCK_URL } from "../../../lib/api-paths";
 import { TextField, Button } from "@mui/material";
 import { pages } from "../../../utils/pages";
 
@@ -11,17 +12,45 @@ type PurchaseModalPropsType = {
     stockPrice: number,
     buttonText: string,
     buttonColor: "primary" | "error",
-    onClose: (event: MouseEvent<HTMLDivElement>) => void 
+    onClose: () => void 
 }
 
 const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor, onClose }: PurchaseModalPropsType) => {
     const [quantity, setQuantity] = useState<number>(0);
     const [quantityOwned, setQuantityOwned] = useState<number | null>(null);
 
+    const [errorMessage, setErrorMessage] = useState<string>("");
+
     const navigate = useNavigate();
     const location = useLocation();
 
     const axiosPrivate = useAxiosPrivate();
+
+    const { auth } = useAuth();
+
+    const handleBuyStock = () => {
+        if (quantity < 1) {
+            setErrorMessage("Buy at least one!");
+            return;
+        }
+
+        if (parseFloat((quantity * stockPrice).toFixed(2)) > auth.balance!) {
+            setErrorMessage("Balance is not high enough!");
+            return;
+        }
+
+        console.log("Bought Stock");
+        onClose();
+
+    }
+
+    const handleSellStock = () => {
+        console.log("Sold Stock");
+    }
+
+    useEffect(() => {
+        setErrorMessage("");
+    }, [quantity])
 
     useEffect(() => {
         let isMounted = true;
@@ -75,13 +104,14 @@ const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor
                         InputProps={{
                             inputProps: {
                                 min: 0,
-                                max: 10
+                                max: 1000
                             }
                         }}
                     />
                     <Button
                         variant="contained"
                         color={buttonColor}
+                        onClick={buttonText === "Buy" ? handleBuyStock : handleSellStock}
                         sx={{ width: "40%" }}
                     >
                         {buttonText}
