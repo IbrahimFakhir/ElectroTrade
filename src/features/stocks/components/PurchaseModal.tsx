@@ -5,6 +5,7 @@ import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import { STOCK_AMOUNT_URL, BUY_STOCK_URL, SELL_STOCK_URL } from "../../../lib/api-paths";
 import { TextField, Button } from "@mui/material";
 import { pages } from "../../../utils/pages";
+import { AxiosError } from "axios";
 
 type PurchaseModalPropsType = {
     stockId: number,
@@ -55,8 +56,16 @@ const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor
             }
             catch(err) {
                 console.log(err);
-                setErrorMessage("Server Error");
-                return;
+                const axiosError = err as AxiosError;
+                if (!axiosError.response) {
+                    setErrorMessage("No Server Response");
+                }
+                else if (axiosError.response?.status === 400) {
+                    navigate(pages.get("authentication")!.path, { state: { from: location }, replace: true });
+                }
+                else {
+                    setErrorMessage("Server Error");
+                }
             }
         }
 
@@ -90,8 +99,16 @@ const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor
             }
             catch (err) {
                 console.log(err);
-                setErrorMessage("Server Error");
-                return;
+                const axiosError = err as AxiosError;
+                if (!axiosError.response) {
+                    setErrorMessage("No Server Response");
+                }
+                else if (axiosError.response?.status === 400) {
+                    navigate(pages.get("authentication")!.path, { state: { from: location }, replace: true });
+                }
+                else {
+                    setErrorMessage("Server Error");
+                }
             }
         }
 
