@@ -1,4 +1,4 @@
-import { useState, MouseEvent, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
@@ -39,9 +39,28 @@ const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor
             return;
         }
 
-        console.log("Bought Stock");
-        onClose();
+        const buy = async () => {
+            try {
+                const response = await axiosPrivate.post(
+                    `${BUY_STOCK_URL}/${stockId}`,
+                    null,
+                    {
+                        params: { quantity }
+                    }
+                );
 
+                console.log(response?.data);
+                console.log("Bought Stock!");
+                onClose();
+            }
+            catch(err) {
+                console.log(err);
+                setErrorMessage("Server Error");
+                return;
+            }
+        }
+
+        buy();
     }
 
     const handleSellStock = () => {
@@ -85,10 +104,11 @@ const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor
         <>
             <div className="fixed top-0 left-0 right-0 bottom-0 bg-[rgba(0,0,0,.5)] z-50" onClick={onClose} />
             <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#FFF] p-6 z-50 flex flex-col justify-between rounded-lg w-72 md:w-80">
-                <div className="flex flex-col md:flex-row md:justify-between">
-                        <h2 className="font-semibold text-xl"><span className="font-medium">{buttonText}</span> {stockName}</h2>
+                <div className="relative flex flex-row justify-between">
+                        <h2 className="font-semibold text-xl">{stockName}</h2>
                         {/* $NaN if no value in TextField, to fix */}
                         <span className="text-secondaryText">${(quantity * stockPrice).toFixed(2)} total</span>
+                        <span className="text-sx text-error absolute -bottom-6 left-0">{errorMessage}</span>
                 </div>
                 <div className="flex justify-between pt-8">
                     <TextField
