@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
-import { STOCK_AMOUNT_URL, BUY_STOCK_URL } from "../../../lib/api-paths";
+import { STOCK_AMOUNT_URL, BUY_STOCK_URL, SELL_STOCK_URL } from "../../../lib/api-paths";
 import { TextField, Button } from "@mui/material";
 import { pages } from "../../../utils/pages";
 
@@ -64,7 +64,38 @@ const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor
     }
 
     const handleSellStock = () => {
-        console.log("Sold Stock");
+        if (quantity < 1) {
+            setErrorMessage("Sell at least one!");
+            return;
+        }
+
+        if (quantity > quantityOwned!) {
+            setErrorMessage(`You only own ${quantityOwned} Stocks!`);
+            return;
+        }
+
+        const sell = async () => {
+            try {
+                const response = await axiosPrivate.post(
+                    `${SELL_STOCK_URL}/${stockId}`,
+                    null,
+                    {
+                        params: { quantity }
+                    }
+                );
+
+                console.log(response?.data);
+                console.log("Sold Stock!");
+                onClose();
+            }
+            catch (err) {
+                console.log(err);
+                setErrorMessage("Server Error");
+                return;
+            }
+        }
+
+        sell();
     }
 
     useEffect(() => {
