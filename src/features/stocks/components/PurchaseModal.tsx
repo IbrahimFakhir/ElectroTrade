@@ -81,7 +81,7 @@ const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor
         }
 
         if (quantity > quantityOwned!) {
-            setErrorMessage(`You only own ${quantityOwned} Stock${ quantityOwned > 1 ? "s" : "" }!`);
+            setErrorMessage(`You only own ${quantityOwned} Stock${ quantityOwned != 1 ? "s" : "" }!`);
             return;
         }
 

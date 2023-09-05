@@ -22,9 +22,9 @@ const StockInfo = ({ stockId, stockName, stockPrice, quantityOwned, updateQuanti
                     <p className="text-secondaryText">${stockPrice}</p>
                     <span className="text-secondaryText">{quantityOwned} owned</span>
                 </div>
-                <div className="flex justify-between md:flex-col gap-3 mt-2 md:mb-8">
-                    <Button 
-                        variant="contained" 
+                <div className="flex justify-between md:flex-col gap-3 mt-2 md:mb-8 md:pr-4">
+                    <Button
+                        variant="contained"
                         color="error"
                         onClick={() => setShowSellModal(true)}
                         sx={{
@@ -36,8 +36,8 @@ const StockInfo = ({ stockId, stockName, stockPrice, quantityOwned, updateQuanti
                     >
                         Sell
                     </Button>
-                    <Button 
-                        variant="contained" 
+                    <Button
+                        variant="contained"
                         color="info"
                         onClick={() => setShowBuyModal(true)}
                         sx={{
