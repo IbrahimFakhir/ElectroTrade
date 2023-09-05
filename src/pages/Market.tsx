@@ -26,6 +26,23 @@ const Market = () => {
     const location = useLocation();
 
 	const axiosPrivate = useAxiosPrivate();
+
+	const updateQuantity = (stockId: number, newQuantity: number) => {
+		if (stockData === null) return;
+
+		const stockIndex = stockData?.stocks.findIndex(stock => stock.id === stockId);
+
+		if (stockIndex === -1) return;
+
+		const updatedStock = { ...stockData.stocks[stockIndex] };
+		updatedStock.quantity = newQuantity;
+
+		const updatedStockData = { ...stockData };
+
+		updatedStockData.stocks[stockIndex] = updatedStock;
+
+		setStockData(updatedStockData);
+	}
 	
 	useEffect(() => {
 		let isMounted = true;
@@ -75,6 +92,7 @@ const Market = () => {
 							timestamps={stockData.timestamps}
 							priceHistory={stock.priceHistory}
 							quantityOwned={stock.quantity}
+							updateQuantity={updateQuantity}
 						/>
 					)
 				}

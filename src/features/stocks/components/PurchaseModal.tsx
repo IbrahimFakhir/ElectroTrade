@@ -14,10 +14,11 @@ type PurchaseModalPropsType = {
     buttonText: string,
     buttonColor: "primary" | "error",
     quantityOwned: number,
-    onClose: () => void 
+    onClose: () => void,
+    updateQuantity: (stockId: number, newQuantity: number) => void
 }
 
-const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor, quantityOwned, onClose }: PurchaseModalPropsType) => {
+const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor, quantityOwned, onClose, updateQuantity }: PurchaseModalPropsType) => {
     const [quantity, setQuantity] = useState<number>(0);
 
     const [errorMessage, setErrorMessage] = useState<string>("");
@@ -51,7 +52,8 @@ const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor
                 );
 
                 console.log(response?.data);
-                setAuth({ ...auth, balance: response?.data });
+                setAuth({ ...auth, balance: response?.data?.balance });
+                updateQuantity(stockId, response?.data?.quantity);
                 onClose();
             }
             catch(err) {
@@ -94,7 +96,8 @@ const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor
                 );
 
                 console.log(response?.data);
-                setAuth({ ...auth, balance: response?.data });
+                setAuth({ ...auth, balance: response?.data?.balance });
+                updateQuantity(stockId, response?.data?.quantity);
                 onClose();
             }
             catch (err) {

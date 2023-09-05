@@ -6,10 +6,11 @@ type StockInfoPropsType = {
     stockId: number,
     stockName: string,
     stockPrice: number,
-    quantityOwned: number
+    quantityOwned: number,
+    updateQuantity: (stockId: number, newQuantity: number) => void
 }
 
-const StockInfo = ({ stockId, stockName, stockPrice, quantityOwned }: StockInfoPropsType) => {
+const StockInfo = ({ stockId, stockName, stockPrice, quantityOwned, updateQuantity }: StockInfoPropsType) => {
     const [showBuyModal, setShowBuyModal] = useState<boolean>(false);
     const [showSellModal, setShowSellModal] = useState<boolean>(false);
 
@@ -57,7 +58,8 @@ const StockInfo = ({ stockId, stockName, stockPrice, quantityOwned }: StockInfoP
                     buttonText="Buy"
                     buttonColor="primary"
                     quantityOwned={quantityOwned}
-                    onClose={() => setShowBuyModal(false)} 
+                    onClose={() => setShowBuyModal(false)}
+                    updateQuantity={updateQuantity}
                 />
             }
             {showSellModal && 
@@ -69,6 +71,7 @@ const StockInfo = ({ stockId, stockName, stockPrice, quantityOwned }: StockInfoP
                     buttonColor="error"
                     quantityOwned={quantityOwned}
                     onClose={() => setShowSellModal(false)}
+                    updateQuantity={updateQuantity}
                 />
             }
         </>
