@@ -10,8 +10,8 @@ const STOCKS_URL = "/market/data";
 
 const STOCK_AMOUNT_URL = "/user/info";
 
-const BUY_STOCK_URL = "/user/buy";
+const BUY_STOCK_URL = "/market/buy";
 
-const SELL_STOCK_URL = "/user/sell";
+const SELL_STOCK_URL = "/market/sell";
 
 export { BASE_URL, REGISTER_URL, LOGIN_URL, REFRESH_URL, STOCKS_URL, STOCK_AMOUNT_URL, BUY_STOCK_URL, SELL_STOCK_URL };
