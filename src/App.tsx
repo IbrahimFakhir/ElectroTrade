@@ -2,6 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./utils/mui-theme";
+import { RequireAuth } from "./features/authentication";
+import { pages, relativeAdminPath, relativePagesPath } from "./utils/pages";
 import Layout from "./layouts/MainLayout/Layout";
 import Welcome from "./pages/Welcome";
 import Portfolio from "./pages/Portfolio";
@@ -9,11 +11,8 @@ import Market from "./pages/Market";
 import Account from "./pages/Account";
 import AuthLayout from "./layouts/AuthLayout/AuthLayout";
 import Authentication from "./pages/Authentication";
-import { RequireAuth } from "./features/authentication";
 import Missing from "./pages/Missing";
-import { pages, relativeAdminPath, relativePagesPath } from "./utils/pages";
 import Unauthorized from "./pages/Unauthorized";
-
 import Admin from "./pages/Admin";
 
 function App() {
