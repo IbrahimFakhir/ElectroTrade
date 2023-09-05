@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
-import { STOCK_AMOUNT_URL, BUY_STOCK_URL, SELL_STOCK_URL } from "../../../lib/api-paths";
+import { BUY_STOCK_URL, SELL_STOCK_URL } from "../../../lib/api-paths";
 import { TextField, Button } from "@mui/material";
 import { pages } from "../../../utils/pages";
 import { AxiosError } from "axios";
@@ -13,12 +13,12 @@ type PurchaseModalPropsType = {
     stockPrice: number,
     buttonText: string,
     buttonColor: "primary" | "error",
+    quantityOwned: number,
     onClose: () => void 
 }
 
-const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor, onClose }: PurchaseModalPropsType) => {
+const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor, quantityOwned, onClose }: PurchaseModalPropsType) => {
     const [quantity, setQuantity] = useState<number>(0);
-    const [quantityOwned, setQuantityOwned] = useState<number | null>(null);
 
     const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -27,7 +27,7 @@ const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor
 
     const axiosPrivate = useAxiosPrivate();
 
-    const { auth } = useAuth();
+    const { auth, setAuth } = useAuth();
 
     const handleBuyStock = () => {
         if (quantity < 1) {
@@ -51,7 +51,7 @@ const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor
                 );
 
                 console.log(response?.data);
-                console.log("Bought Stock!");
+                setAuth({ ...auth, balance: response?.data });
                 onClose();
             }
             catch(err) {
@@ -94,7 +94,7 @@ const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor
                 );
 
                 console.log(response?.data);
-                console.log("Sold Stock!");
+                setAuth({ ...auth, balance: response?.data });
                 onClose();
             }
             catch (err) {
@@ -118,35 +118,6 @@ const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor
     useEffect(() => {
         setErrorMessage("");
     }, [quantity])
-
-    useEffect(() => {
-        let isMounted = true;
-        const controller = new AbortController;
-
-        const getStockAmount = async () => {
-            try {
-                const response = await axiosPrivate.get(
-                    STOCK_AMOUNT_URL + `/${stockId}`,
-                    {
-                        signal: controller.signal
-                    }
-                )
-                isMounted && console.log(response?.data);
-                isMounted && setQuantityOwned(response?.data);
-            }
-            catch (err) {
-                console.log(err);
-                navigate(pages.get("authentication")!.path, { state: { from: location }, replace: true });
-            }
-        }
-
-        getStockAmount();
-
-        return () => {
-            isMounted = false;
-            controller.abort();
-        }
-    }, [])
 
     return (
         <>

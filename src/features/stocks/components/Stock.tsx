@@ -6,10 +6,11 @@ type StockPropsType = {
     id: number,
     name: string,
     timestamps: string[],
-    priceHistory: number[]
+    priceHistory: number[],
+    quantityOwned: number
 }
 
-const Stock = ({ id, name, timestamps, priceHistory }: StockPropsType) => {
+const Stock = ({ id, name, timestamps, priceHistory, quantityOwned }: StockPropsType) => {
     return (
         <Paper 
             sx={{
@@ -17,7 +18,7 @@ const Stock = ({ id, name, timestamps, priceHistory }: StockPropsType) => {
             }}
         >
             <div className="flex flex-col md:flex-row items-center md:items-stretch">
-                <StockInfo stockId={id} stockName={name} stockPrice={priceHistory[priceHistory.length - 1]} />
+                <StockInfo stockId={id} stockName={name} stockPrice={priceHistory[priceHistory.length - 1]} quantityOwned={quantityOwned} />
                 <Chart stockCategories={timestamps} stockValues={priceHistory} />
             </div>
         </Paper>

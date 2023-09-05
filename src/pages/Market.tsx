@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Stock } from "../features/stocks";
-import axios from "../lib/axios";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { STOCKS_URL } from "../lib/api-paths";
+import { pages } from "../utils/pages";
 
 type StockType = {
 	id: number,
 	name: string,
-	priceHistory: number[]
+	priceHistory: number[],
+	quantity: number
 }
 
 type StockDataType = {
@@ -18,6 +21,11 @@ const Market = () => {
 	const [stockData, setStockData] = useState<StockDataType | null>(null);
 
 	const [test, setTest] = useState(false);
+
+	const navigate = useNavigate();
+    const location = useLocation();
+
+	const axiosPrivate = useAxiosPrivate();
 	
 	useEffect(() => {
 		let isMounted = true;
@@ -25,7 +33,7 @@ const Market = () => {
 
 		const getStocks = async () => {
 			try {
-				const response = await axios.get(
+				const response = await axiosPrivate.get(
 					STOCKS_URL,
 					{
 						signal: controller.signal
@@ -33,10 +41,10 @@ const Market = () => {
 				);
 				console.log(response?.data);
 				isMounted && setStockData(response?.data);
-				
 			}
 			catch (err) {
 				console.log(err);
+                navigate(pages.get("authentication")!.path, { state: { from: location }, replace: true });
 			}
 		}
 
@@ -64,8 +72,9 @@ const Market = () => {
 							id={stock.id}
 							key={index}
 							name={stock.name}
-							timestamps={stockData?.timestamps}
+							timestamps={stockData.timestamps}
 							priceHistory={stock.priceHistory}
+							quantityOwned={stock.quantity}
 						/>
 					)
 				}

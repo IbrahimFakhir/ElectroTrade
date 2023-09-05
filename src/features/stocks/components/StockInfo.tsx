@@ -5,10 +5,11 @@ import PurchaseModal from "./PurchaseModal";
 type StockInfoPropsType = {
     stockId: number,
     stockName: string,
-    stockPrice: number
+    stockPrice: number,
+    quantityOwned: number
 }
 
-const StockInfo = ({ stockId, stockName, stockPrice }: StockInfoPropsType) => {
+const StockInfo = ({ stockId, stockName, stockPrice, quantityOwned }: StockInfoPropsType) => {
     const [showBuyModal, setShowBuyModal] = useState<boolean>(false);
     const [showSellModal, setShowSellModal] = useState<boolean>(false);
 
@@ -48,8 +49,28 @@ const StockInfo = ({ stockId, stockName, stockPrice }: StockInfoPropsType) => {
                     </Button>
                 </div>
             </div>
-            {showBuyModal && <PurchaseModal stockId={stockId} stockName={stockName} stockPrice={stockPrice} buttonText="Buy" buttonColor="primary" onClose={() => setShowBuyModal(false)} />}
-            {showSellModal && <PurchaseModal stockId={stockId} stockName={stockName} stockPrice={stockPrice} buttonText="Sell" buttonColor="error" onClose={() => setShowSellModal(false)} />}
+            {showBuyModal && 
+                <PurchaseModal
+                    stockId={stockId}
+                    stockName={stockName}
+                    stockPrice={stockPrice}
+                    buttonText="Buy"
+                    buttonColor="primary"
+                    quantityOwned={quantityOwned}
+                    onClose={() => setShowBuyModal(false)} 
+                />
+            }
+            {showSellModal && 
+                <PurchaseModal
+                    stockId={stockId}
+                    stockName={stockName}
+                    stockPrice={stockPrice}
+                    buttonText="Sell"
+                    buttonColor="error"
+                    quantityOwned={quantityOwned}
+                    onClose={() => setShowSellModal(false)}
+                />
+            }
         </>
     )
 }
