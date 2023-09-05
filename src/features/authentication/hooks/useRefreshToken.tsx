@@ -1,6 +1,6 @@
-import axios from "../lib/axios";
-import useAuth from "./useAuth";
-import { REFRESH_URL } from "../lib/api-paths";
+import axios from "../../../lib/axios";
+import useAuth from "../../../hooks/useAuth";
+import { REFRESH_URL } from "../../../lib/api-paths";
 
 const useRefreshToken = () => {
     const { setAuth } = useAuth();
