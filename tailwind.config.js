@@ -22,7 +22,8 @@ export default {
 				"mainMobile": "calc(100% - 4rem)"
 			},
 			width: {
-				"mainDesktop": "calc(100% - 14rem)"
+				"mainDesktop": "calc(100% - 14rem)",
+				"scrollableContainer": "calc(100% + 0.5rem)"
 			},
 			maxWidth: {
 				"navItemMobile": "4rem"

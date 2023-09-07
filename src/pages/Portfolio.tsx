@@ -84,7 +84,7 @@ const Portfolio = () => {
 				<h1 className="text-3xl font-medium px-2 md:px-0 mb-4">Your Stocks</h1>
                 <button onClick={() => setTest(prev => !prev)} className="bg-secondaryText rounded">test fetch</button>
 			</div>
-            <div className="max-h-[90%] overflow-y-auto flex md:grid flex-col md:grid-cols-[repeat(auto-fill,_36rem)] md:grid-rows-[repeat(auto-fill)] md:justify-evenly md:gap-x-2 gap-y-4 px-2">
+            <div className="max-h-[90%] overflow-y-auto flex md:grid flex-col md:grid-cols-[repeat(auto-fill,_36rem)] md:grid-rows-[repeat(auto-fill)] 2xl:justify-between md:gap-x-2 gap-y-4 px-2 md:px-0 md:w-scrollableContainer md:pr-2">
                 {
 					stockData && stockData.stocks.map((stock, index) => 
 						<Stock
