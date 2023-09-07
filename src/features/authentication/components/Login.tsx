@@ -21,7 +21,7 @@ const Login = ({ setHasAccount }: LoginPropsType) => {
     const location = useLocation();
     const from = location?.state?.from?.pathname || relativePagesPath;
 
-    const [userId, setUserId] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
     const [errorMessage, setErrorMessage] = useState<string>("");
@@ -30,7 +30,7 @@ const Login = ({ setHasAccount }: LoginPropsType) => {
 
     useEffect(() => {
         setErrorMessage("");
-    }, [userId, password])
+    }, [email, password])
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -38,7 +38,7 @@ const Login = ({ setHasAccount }: LoginPropsType) => {
         try {
             const response = await axios.post(
                 LOGIN_URL,
-                JSON.stringify({ email: userId, password }),
+                JSON.stringify({ email, password }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
@@ -52,13 +52,13 @@ const Login = ({ setHasAccount }: LoginPropsType) => {
             const accessToken: string = response?.data?.accessToken;
             setAuth({
                 name: name,
-                userId: userId,
+                email: email,
                 balance: balance,
                 roles: roles,
                 accessToken: accessToken
             });
 
-            setUserId("");
+            setEmail("");
             setPassword("");
     
             navigate(from, { replace: true });
@@ -96,11 +96,11 @@ const Login = ({ setHasAccount }: LoginPropsType) => {
                 <div className="mt-8 mb-8">
                     <div className="relative">
                         <TextField
-                            id="user-id"
-                            label="User ID"
+                            id="email"
+                            label="Email"
                             required
-                            value={userId}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserId(e.target.value)}
+                            value={email}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
                             {...(hasTouchScreen ? {} : { autoFocus: true })}
                             autoComplete="off"
                             variant="filled"
@@ -135,7 +135,7 @@ const Login = ({ setHasAccount }: LoginPropsType) => {
                         type="submit" 
                         variant="contained" 
                         sx={{ width: "100%" }}
-                        disabled={ !userId.length || !password.length }
+                        disabled={ !email.length || !password.length }
                     >
                         Continue
                     </Button>

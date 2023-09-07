@@ -23,8 +23,8 @@ const AccountCard = () => {
             </div>
             <TextField>
                 <div className="flex justify-between">
-                    <span className="font-bold">User ID</span>
-                    <span>{auth.userId}</span>
+                    <span className="font-bold">Email</span>
+                    <span>{auth.email}</span>
                 </div>
             </TextField>
             <TextField>

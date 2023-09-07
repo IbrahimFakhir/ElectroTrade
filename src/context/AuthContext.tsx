@@ -2,7 +2,7 @@ import { Dispatch, ReactNode, SetStateAction, createContext, useState } from "re
 
 export type Auth = {
     name: string | null,
-    userId: string | null,
+    email: string | null,
     balance: number | null,
     roles: number[],
     accessToken: string | null
@@ -18,7 +18,7 @@ export interface AuthContextInterface {
 const defaultState = {
     auth: {
         name: null,
-        userId: null,
+        email: null,
         balance: null,
         roles: [],
         accessToken: null
@@ -33,7 +33,7 @@ type AuthProviderProps = {
 }
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
-    const [auth, setAuth] = useState<Auth>({ name: null, userId: null, balance: null,roles: [], accessToken: null })
+    const [auth, setAuth] = useState<Auth>({ name: null, email: null, balance: null,roles: [], accessToken: null })
 
     return (
         <AuthContext.Provider value={{ auth, setAuth }} >

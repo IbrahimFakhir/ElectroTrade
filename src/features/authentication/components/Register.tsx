@@ -10,11 +10,13 @@ import hasTouchScreen from "../../../utils/has-touchscreen";
 import { useNavigate } from "react-router-dom";
 
 const NAME_REGEX: RegExp = /^[A-Za-z]+ [A-Za-z]+$/;
-const USERID_REGEX: RegExp = /^[A-Za-z0-9]{3,}$/;
+const EMAIL_REGEX: RegExp = /^[A-Za-z0-9]{3,}$/;
+// regex for production:
+// const EMAIL_REGEX: RegExp = /^[a-zA-Z0-9.]+@[a-zA-Z]+[.][a-zA-Z]+$/;
 const PASSWORD_REGEX: RegExp = /^[A-Za-z0-9]{3,}$/;
 
 const nameErrorText = "Please enter first and last name";
-const userIdErrorText = "At least 3 characters";
+const emailErrorText = "Please follow the standard email format";
 const passwordErrorText = "At least 3 characters";
 
 type RegisterPropsType = {
@@ -28,9 +30,9 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
     const [validName, setValidName] = useState<boolean>(false);
     const [nameFocus, setNameFocus] = useState<boolean>(false);
 
-    const [userId, setUserId] = useState<string>("");
-    const [validUserId, setValidUserId] = useState<boolean>(false);
-    const [userIdFocus, setUserIdFocus] = useState<boolean>(false);
+    const [email, setEmail] = useState<string>("");
+    const [validEmail, setValidEmail] = useState<boolean>(false);
+    const [emailFocus, setEmailFocus] = useState<boolean>(false);
 
     const [password, setPassword] = useState<string>("");
     const [validPassword, setValidPassword] = useState<boolean>(false);
@@ -47,8 +49,8 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
     }, [name])
 
     useEffect(() => {
-        setValidUserId(USERID_REGEX.test(userId));
-    }, [userId])
+        setValidEmail(EMAIL_REGEX.test(email));
+    }, [email])
 
     useEffect(() => {
         setValidPassword(PASSWORD_REGEX.test(password));
@@ -56,15 +58,15 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
 
     useEffect(() => {
         setErrorMessage("");
-    }, [name, userId, password])
+    }, [name, email, password])
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const verifyName = NAME_REGEX.test(name);
-        const verifyUserId = USERID_REGEX.test(userId);
+        const verifyEmail = EMAIL_REGEX.test(email);
         const verifyPassword = PASSWORD_REGEX.test(password);
-        if (!verifyName || !verifyUserId || !verifyPassword) {
+        if (!verifyName || !verifyEmail || !verifyPassword) {
             setErrorMessage("Invalid entry");
             return;
         }
@@ -72,7 +74,7 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
         try {
             const response = await axios.post(
                 REGISTER_URL,
-                JSON.stringify({ name, email: userId, password }),
+                JSON.stringify({ name, email, password }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
@@ -84,14 +86,14 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
             const accessToken = response?.data?.accessToken;
             setAuth({ 
                 name: name, 
-                userId: userId, 
+                email: email, 
                 balance: balance, 
                 roles: [2], 
                 accessToken: accessToken 
             });
 
             setName("");
-            setUserId("");
+            setEmail("");
             setPassword("");
             
             navigate("/pages");
@@ -102,9 +104,9 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
             if (!axiosError.response) {
                 setErrorMessage('No Server Response');
             }
-            else if (axiosError.response?.status === 400) {
+            /* else if (axiosError.response?.status === 400) {
                 setErrorMessage('Missing Username or Password');
-            }
+            } */
             else {
                 setErrorMessage('Login Failed');
             }
@@ -156,23 +158,23 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
                     </div>
                     <div className="relative">
                         <TextField
-                            id="user-id"
-                            label="User ID"
+                            id="email"
+                            label="Email"
                             required
-                            value={userId}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserId(e.target.value)}
-                            error={userId.length !== 0 && !validUserId}
-                            onFocus={() => setUserIdFocus(true)}
-                            onBlur={() => setUserIdFocus(false)}
+                            value={email}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                            error={email.length !== 0 && !validEmail}
+                            onFocus={() => setEmailFocus(true)}
+                            onBlur={() => setEmailFocus(false)}
                             autoComplete="off"
                             variant="filled" 
                             sx={{ width: "100%", margin: "0.5rem 0" }}
                         />
-                        { userId.length !== 0 &&
-                            !validUserId &&
-                            userIdFocus &&
+                        { email.length !== 0 &&
+                            !validEmail &&
+                            emailFocus &&
                             <span className="text-xs text-error absolute -bottom-2 left-3">
-                                {userIdErrorText}
+                                {emailErrorText}
                             </span> 
                         }
                     </div>
@@ -214,7 +216,7 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
                         type="submit" 
                         variant="contained" 
                         sx={{ width: "100%" }}
-                        disabled={ !validName || !validUserId || !validPassword }
+                        disabled={ !validName || !validEmail || !validPassword }
                     >
                         Get started
                     </Button>
