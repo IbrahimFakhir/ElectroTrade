@@ -6,7 +6,7 @@ Before you proceed, please ensure that Docker is installed and running on your s
 
 **Note:** Ensure that ports 8080 and 5173 are available.
 
-To build and run the project, open your terminal and execute the following command:
+To build and run the project, open your terminal, navigate to the root directory of the project, and then execute the following command:
 
 ```bash
 docker-compose up
