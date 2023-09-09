@@ -26,4 +26,3 @@ Feel free to reach out if you encounter any issues during the setup process.
 ### Backend
 - [Java Spring Framework](https://spring.io/)
 - [H2 Database](https://www.h2database.com/)
-- 
