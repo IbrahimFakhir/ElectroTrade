@@ -11,3 +11,18 @@ services:
       context: ./backend
     ports:
       - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/test-db
+      SPRING_DATASOURCE_USERNAME: test-user
+      SPRING_DATASOURCE_PASSWORD: test-password
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: test-db
+      POSTGRES_USER: test-user
+      POSTGRES_PASSWORD: test-password

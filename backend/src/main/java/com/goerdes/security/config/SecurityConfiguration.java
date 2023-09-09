@@ -53,7 +53,7 @@ public class SecurityConfiguration {
         .csrf()
         .disable()
         .authorizeHttpRequests()
-        .requestMatchers(PathRequest.toH2Console()).permitAll()
+        // .requestMatchers(PathRequest.toH2Console()).permitAll()
         .requestMatchers(
             //    "/user/data/**",
                 "/auth/**",

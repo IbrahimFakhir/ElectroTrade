@@ -1,15 +1,12 @@
 spring:
-  h2:
-    console:
-      enabled: true
   datasource:
-    platform: h2
-    url: jdbc:h2:mem:testdb  # Use an in-memory H2 database
-    username: sa
-    password:
-    driverClassName: org.h2.Driver
-  allowed:
-    resources: /h2-console/**
+    url: jdbc:postgresql://postgres:5432/test-db
+    username: test-user
+    password: test-password
+    driverClassName: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
 
 application:
   security:
