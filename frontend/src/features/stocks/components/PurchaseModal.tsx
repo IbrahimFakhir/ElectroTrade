@@ -129,7 +129,7 @@ const PurchaseModal = ({ stockId, stockName, stockPrice, buttonText, buttonColor
                 <div className="relative flex flex-row justify-between">
                         <h2 className="font-semibold text-xl">{stockName}</h2>
                         {/* $NaN if no value in TextField, to fix */}
-                        <span className="text-secondaryText">${(quantity * stockPrice).toFixed(2)} total</span>
+                        <span className="text-secondaryText">${!isNaN(quantity) ?  (quantity * stockPrice).toFixed(2) : "0.00" } total</span>
                         <span className="text-sx text-error absolute -bottom-6 left-0">{errorMessage}</span>
                 </div>
                 <div className="flex justify-between pt-8">
