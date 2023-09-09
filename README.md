@@ -8,7 +8,7 @@ Before you proceed, please ensure that Docker is installed and running on your s
 
 To build and run the project, open your terminal, navigate to the root directory of the project, and then execute the following command:
 
-```bash
+```
 docker-compose up
 ```
 
