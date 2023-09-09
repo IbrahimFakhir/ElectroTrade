@@ -15,3 +15,15 @@ docker-compose up
 After running the command, you can access the application in your web browser by navigating to http://localhost:5173
 
 Feel free to reach out if you encounter any issues during the setup process.
+
+## Technologies Used
+
+### Frontend
+- [React](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+
+### Backend
+- [Java Spring Framework](https://spring.io/)
+- [H2 Database](https://www.h2database.com/)
+- 
