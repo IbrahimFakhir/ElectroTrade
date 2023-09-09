@@ -2,7 +2,7 @@
 
 ## Running the Project
 
-Before you proceed, please ensure that Docker is installed and running on your system. If not, you can  [download and install Docker](https://www.docker.com/get-started) first.
+Before you proceed, please ensure that Docker is installed and running on your system. If not, you can [download and install Docker](https://www.docker.com/get-started) first.
 
 **Note:** Ensure that ports 8080 and 5173 are available.
 
@@ -20,8 +20,8 @@ Feel free to reach out if you encounter any issues during the setup process.
 
 ### Frontend
 - [React](https://reactjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
 ### Backend
 - [Java Spring Framework](https://spring.io/)
