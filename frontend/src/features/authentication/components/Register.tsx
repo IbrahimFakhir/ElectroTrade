@@ -10,9 +10,8 @@ import hasTouchScreen from "../../../utils/has-touchscreen";
 import { useNavigate } from "react-router-dom";
 
 const NAME_REGEX: RegExp = /^[A-Za-z]+ [A-Za-z]+$/;
-const EMAIL_REGEX: RegExp = /^[A-Za-z0-9]{3,}$/;
-// regex for production:
-// const EMAIL_REGEX: RegExp = /^[a-zA-Z0-9.]+@[a-zA-Z]+[.][a-zA-Z]+$/;
+// const EMAIL_REGEX: RegExp = /^[A-Za-z0-9]{3,}$/;
+const EMAIL_REGEX: RegExp = /^[a-zA-Z0-9.]+@[a-zA-Z]+[.][a-zA-Z]+$/;
 const PASSWORD_REGEX: RegExp = /^[A-Za-z0-9]{3,}$/;
 
 const nameErrorText = "Please enter first and last name";
@@ -108,7 +107,7 @@ const Register = ({ setHasAccount }: RegisterPropsType) => {
                 setErrorMessage('Missing Username or Password');
             } */
             else {
-                setErrorMessage('Login Failed');
+                setErrorMessage('Register Failed');
             }
         }
     }

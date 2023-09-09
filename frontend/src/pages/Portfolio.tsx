@@ -4,6 +4,7 @@ import { Stock } from "../features/stocks";
 import { STOCKS_URL } from "../lib/api-paths";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { pages } from "../utils/pages";
+import BlockIcon from '@mui/icons-material/Block';
 
 type StockType = {
 	id: number,
@@ -19,8 +20,6 @@ type StockDataType = {
 
 const Portfolio = () => {
     const [stockData, setStockData] = useState<StockDataType | null>(null);
-
-    const [test, setTest] = useState(false);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -76,29 +75,38 @@ const Portfolio = () => {
 			isMounted = false;
 			controller.abort();
 		}
-	}, [test])
+	}, [])
 
     return (
         <div className="h-full md:mx-auto md:w-4/5 pt-6 md:pt-10 px-6 md:px-8">
-            <div className="flex justify-between">
-				<h1 className="text-3xl font-medium px-2 md:px-0 mb-4">Your Stocks</h1>
-                <button onClick={() => setTest(prev => !prev)} className="bg-secondaryText rounded">test fetch</button>
-			</div>
-            <div className="max-h-[90%] overflow-y-auto flex md:grid flex-col md:grid-cols-[repeat(auto-fill,_36rem)] md:grid-rows-[repeat(auto-fill)] 2xl:justify-between md:gap-x-2 gap-y-4 px-2 md:px-0 md:w-scrollableContainer md:pr-2">
-                {
-					stockData && stockData.stocks.map((stock, index) => 
-						<Stock
-							id={stock.id}
-							key={index}
-							name={stock.name}
-							timestamps={stockData.timestamps}
-							priceHistory={stock.priceHistory}
-							quantityOwned={stock.quantity}
-							updateQuantity={updateQuantity}
-						/>
-					)
-				}
-            </div>
+			{
+				stockData &&
+					stockData.stocks.length !== 0 
+						?
+						<>
+						<h1 className="text-3xl font-medium px-2 md:px-0 mb-4">Your Stocks</h1>
+						<div className="max-h-[90%] overflow-y-auto flex md:grid flex-col md:grid-cols-[repeat(auto-fill,_36rem)] md:grid-rows-[repeat(auto-fill)] 2xl:justify-between md:gap-x-2 gap-y-4 px-2 md:px-0 md:w-scrollableContainer md:pr-2">
+							{stockData.stocks.map((stock, index) => 
+								<Stock
+									id={stock.id}
+									key={index}
+									name={stock.name}
+									timestamps={stockData.timestamps}
+									priceHistory={stock.priceHistory}
+									quantityOwned={stock.quantity}
+									updateQuantity={updateQuantity}
+								/>
+							)}
+						</div>
+						</>
+						: 
+						<div className="h-full w-full flex justify-center items-center">
+							<div className="flex flex-col gap-2 items-center">
+								<BlockIcon />
+								<h1 className="text-xl font-medium">No Stocks yet</h1>
+							</div>
+						</div>
+			}
         </div>
     )
 }
