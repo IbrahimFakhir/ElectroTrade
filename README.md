@@ -2,7 +2,7 @@
 
 ## Running the Project
 
-Before you proceed, please ensure that Docker is installed and running on your system. If not, you can [download and install Docker](https://www.docker.com/get-started) first.
+Before you proceed, please ensure that Docker is installed and running on your system. If not, you can <a href="https://www.docker.com/get-started" target="_blank">download and install Docker</a> first.
 
 **Note:** Ensure that ports 8080 and 5173 are available.
 
