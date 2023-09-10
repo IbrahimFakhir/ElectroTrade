@@ -1,5 +1,7 @@
 # ElectroTrade
 
+![Project Status](https://img.shields.io/badge/Status-In%20Development-yellow)
+
 ## Running the Project
 
 Before you proceed, please ensure that Docker is installed and running on your system. If not, you can [download and install Docker](https://www.docker.com/get-started) first.
